@@ -1,0 +1,6 @@
+#Pycham#
+.idea
+venv
+
+#test files#
+test2.py
