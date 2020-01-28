@@ -18,7 +18,7 @@ print("총 {}일간의 데이터 수집!".format(len(days_range)))
 
 # 특정 검색어가 포함된 트윗 검색! (quary search)
 # str 변수가 검색어임
-str = "기분"
+str = "졸프"
 
 print("검색 단어는 [ %s ] 입니다." %str )
 
