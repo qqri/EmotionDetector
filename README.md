@@ -1,5 +1,11 @@
 # EmotionDetector_public
-졸업프로젝트 13팀입니다. 
+졸업프로젝트 13팀입니다. 2
+
+
+
+### 시연영상  주소 : https://youtu.be/hhxQ_SqPJ3E
+
+
 
 * private에서 원래 진행상황중이었던 파일은 캡처본으로 올렸습니다. 
 
