@@ -6,9 +6,5 @@
 ### 시연영상  주소 : https://youtu.be/hhxQ_SqPJ3E
 
 
-
-* private에서 원래 진행상황중이었던 파일은 캡처본으로 올렸습니다. 
-
-* public 버전으로 보안상의 이유로 키 정보는 다 지웠습니다. 
-
-* 진행상황은 private 버전 레파지토리에 올리겠습니다! 
+keras version : 2.1.5<br>
+tensorflow version : 1.4.0 (downgrade함)
