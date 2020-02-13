@@ -6,8 +6,8 @@ import time
 
 days_range = []
 
-start = datetime.datetime.strptime("2019-01-18","%Y-%m-%d")
-end = datetime.datetime.strptime("2019-01-19","%Y-%m-%d")
+start = datetime.datetime.strptime("2019-03-18","%Y-%m-%d")
+end = datetime.datetime.strptime("2019-03-19","%Y-%m-%d")
 date_generated = [start + datetime.timedelta(days=x) for x in range(0,(end-start).days)]
 
 for date in date_generated:
@@ -18,7 +18,7 @@ print("총 {}일간의 데이터 수집!".format(len(days_range)))
 
 # 특정 검색어가 포함된 트윗 검색! (quary search)
 # str 변수가 검색어임
-str = "우동"
+str = "힐링"
 
 print("검색 단어는 [ %s ] 입니다." %str)
 
