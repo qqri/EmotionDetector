@@ -1,7 +1,9 @@
-import requests
-import sys, json
+# USAGE
+# python simple_request.py
 
-#return requests.get(url).json()
+# import the necessary packages
+import requests
+
 # initialize the Keras REST API endpoint URL along with the input
 # image path
 KERAS_REST_API_URL = "http://localhost:5000/predict"
@@ -12,10 +14,8 @@ image = open(IMAGE_PATH, "rb").read()
 payload = {"image": image}
 
 # submit the request
+print(KERAS_REST_API_URL)
 r = requests.post(KERAS_REST_API_URL, files=payload).json()
-
-# if json_string:
-#     x = json.loads(json_string)
 
 # ensure the request was sucessful
 if r["success"]:
