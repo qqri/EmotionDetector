@@ -1,10 +1,17 @@
 # EmotionDetector_public
-졸업프로젝트 13팀입니다. 2
+졸업프로젝트 13팀  Lucky13 입니다. 
 
 
 
-### 시연영상  주소 : https://youtu.be/hhxQ_SqPJ3E
+## 사용스택
 
+- tensorflow (1.4.0 ver) 
+- keras (2.1.5 ver)
 
-keras version : 2.1.5<br>
-tensorflow version : 1.4.0 (downgrade함)
+- Python 3.6
+
+### server
+
+- flask 
+
+- SQLite
