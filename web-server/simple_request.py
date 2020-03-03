@@ -14,7 +14,6 @@ image = open(IMAGE_PATH, "rb").read()
 payload = {"image": image}
 
 # submit the request
-print(KERAS_REST_API_URL)
 r = requests.post(KERAS_REST_API_URL, files=payload).json()
 
 # ensure the request was sucessful
