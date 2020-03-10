@@ -1,7 +1,7 @@
 import requests
 
 # URL
-url = 'http://localhost:5000/api/'
+url = 'http://localhost:5000/predict/'
 
 # Change the value of experience that you want to test
 payload = {
