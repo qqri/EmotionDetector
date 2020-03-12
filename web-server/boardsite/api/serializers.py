@@ -3,6 +3,7 @@ from rest_framework import serializers
 from .models import Post
 from django.contrib.auth.models import User
 
+
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -21,3 +22,14 @@ class PostSerializer(serializers.ModelSerializer):
             'user',
         )
         read_only_fields = ('created_at',)
+
+
+
+## 0310 연습용
+# class MLSerializer(serializers.ModelSerializer):
+#     user = UserSerializer(read_only=True)
+#     class Meta:
+#         model = Post
+#         fields = (
+#             'content',
+#         )
