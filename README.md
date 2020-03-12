@@ -16,7 +16,7 @@
 
 ### server
 
-- flask ( 1.1.1_ver)<br>
+- django ( 2.1.5_ver)<br>
 
-- SQLite
+- PostgreSQL
 
