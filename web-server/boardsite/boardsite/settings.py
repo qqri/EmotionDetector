@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'api.apps.ApiConfig',
     'rest_framework',
+    'haystack',
+    'elasticsearch',
 ]
 
 MIDDLEWARE = [
@@ -106,7 +108,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = "Asia/Seoul"
 
 USE_I18N = True
 
@@ -131,6 +133,72 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 10
 }
 
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.elasticsearch5_backend.Elasticsearch5SearchEngine',
+        'URL': 'http://127.0.0.1:9200/',
+        'INDEX_NAME': 'haystack',
+    },
+}
+
+ELASTICSEARCH_DEFAULT_ANALYZER = 'korean_index'
+
+
+ELASTICSEARCH_INDEX_SETTINGS = {
+  'settings': {
+      "analysis": {
+          "analyzer": {
+              "korean_index": {
+                  "type": "custom",
+                  "tokenizer": "mecab_ko_standard_tokenizer"
+              },
+              "korean_query": {
+                  "type": "custom",
+                  "tokenizer": "korean_query_tokenizer"
+              },
+              "ngram_analyzer": {
+                  "type": "custom",
+                  "tokenizer": "standard",
+                  "filter": ["haystack_ngram", "lowercase"]
+              },
+              "edgengram_analyzer": {
+                  "type": "custom",
+                  "tokenizer": "standard",
+                  "filter": ["haystack_edgengram", "lowercase"]
+              }
+          },
+          "tokenizer": {
+              "korean_query_tokenizer": {
+                  "type": "mecab_ko_standard_tokenizer",
+                  "compound_noun_min_length": 100
+              },
+              "haystack_ngram_tokenizer": {
+                  "type": "nGram",
+                  "min_gram": 3,
+                  "max_gram": 15,
+              },
+              "haystack_edgengram_tokenizer": {
+                  "type": "edgeNGram",
+                  "min_gram": 2,
+                  "max_gram": 15,
+                  "side": "front"
+              }
+          },
+          "filter": {
+              "haystack_ngram": {
+                  "type": "nGram",
+                  "min_gram": 3,
+                  "max_gram": 15
+              },
+              "haystack_edgengram": {
+                  "type": "edgeNGram",
+                  "min_gram": 2,
+                  "max_gram": 15
+              }
+          }
+      }
+  }
+}
 
 
 

@@ -20,6 +20,8 @@ from .models import Post
 from rest_framework import permissions
 import pickle
 import os
+from django.conf import settings
+
 import MeCab
 from keras_preprocessing.sequence import pad_sequences
 from keras.preprocessing.text import Tokenizer
@@ -42,6 +44,12 @@ class PostView(viewsets.ModelViewSet):
 
         model = pickle.load(open(path, 'rb'))
         sentence = serializer.data['content']
-        print(model.predict_classes( getSequences(sentence)))
-        return Response(model.predict_classes( getSequences(sentence)),status=status.HTTP_200_OK)
+
+        test = "날씨가 좋다"
+        test = [x.split("\t")[0] for x in m.parse(test).split("\n") if not x == "EOS" and not x == ""]
+        print(pad_sequences(tokenizer.texts_to_sequences([test]), maxlen=maxlen))
+
+        data = model.predict_classes(getSequences(sentence))
+        #return Response(model.predict_classes( getSequences(sentence)),status=status.HTTP_200_OK)
+        return HttpResponse(data)
 
