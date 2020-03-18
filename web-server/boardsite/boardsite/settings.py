@@ -38,8 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'api.apps.ApiConfig',
     'rest_framework',
-    'haystack',
-    'elasticsearch',
 ]
 
 MIDDLEWARE = [
@@ -78,8 +76,12 @@ WSGI_APPLICATION = 'boardsite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'lucky13_db',
+        'USER': 'lucky13',
+        'PASSWORD': '1234',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
 
@@ -125,82 +127,25 @@ STATIC_URL = '/static/'
 MODEL_URL = '/model/'
 MODEL_ROOT = os.path.join(BASE_DIR, 'static' ,'model/gru_model.pkl')
 
+# REST_FRAMEWORK = {
+#     'DEFAULT_AUTHENTICATION_CLASSES': (
+#         'rest_framework.authentication.TokenAuthentication',
+#         'rest_framework.authentication.SessionAuthentication',
+#     ),
+#     'PAGE_SIZE': 10
+# }
+
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
     ),
-    'PAGE_SIZE': 10
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAdminUser',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES':
+        ('rest_framework.authentication.BasicAuthentication',
+    ),
 }
-
-HAYSTACK_CONNECTIONS = {
-    'default': {
-        'ENGINE': 'haystack.backends.elasticsearch5_backend.Elasticsearch5SearchEngine',
-        'URL': 'http://127.0.0.1:9200/',
-        'INDEX_NAME': 'haystack',
-    },
-}
-
-ELASTICSEARCH_DEFAULT_ANALYZER = 'korean_index'
-
-
-ELASTICSEARCH_INDEX_SETTINGS = {
-  'settings': {
-      "analysis": {
-          "analyzer": {
-              "korean_index": {
-                  "type": "custom",
-                  "tokenizer": "mecab_ko_standard_tokenizer"
-              },
-              "korean_query": {
-                  "type": "custom",
-                  "tokenizer": "korean_query_tokenizer"
-              },
-              "ngram_analyzer": {
-                  "type": "custom",
-                  "tokenizer": "standard",
-                  "filter": ["haystack_ngram", "lowercase"]
-              },
-              "edgengram_analyzer": {
-                  "type": "custom",
-                  "tokenizer": "standard",
-                  "filter": ["haystack_edgengram", "lowercase"]
-              }
-          },
-          "tokenizer": {
-              "korean_query_tokenizer": {
-                  "type": "mecab_ko_standard_tokenizer",
-                  "compound_noun_min_length": 100
-              },
-              "haystack_ngram_tokenizer": {
-                  "type": "nGram",
-                  "min_gram": 3,
-                  "max_gram": 15,
-              },
-              "haystack_edgengram_tokenizer": {
-                  "type": "edgeNGram",
-                  "min_gram": 2,
-                  "max_gram": 15,
-                  "side": "front"
-              }
-          },
-          "filter": {
-              "haystack_ngram": {
-                  "type": "nGram",
-                  "min_gram": 3,
-                  "max_gram": 15
-              },
-              "haystack_edgengram": {
-                  "type": "edgeNGram",
-                  "min_gram": 2,
-                  "max_gram": 15
-              }
-          }
-      }
-  }
-}
-
-
 
 
 
