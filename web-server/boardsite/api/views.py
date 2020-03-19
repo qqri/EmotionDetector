@@ -4,19 +4,13 @@ from django.conf import settings
 from django.shortcuts import render
 
 # Create your views here.
-from django.shortcuts import render
-from django.http import HttpResponse
-from rest_framework.response import Response
+from django.http import HttpResponse, Http404
+from django.template.loader import get_template
+from .models import Post
+from django.views import generic
 
-
-def index(request):
-    return HttpResponse("Hello, world. You're at the index.")
-
-
-# api/views.py
 from rest_framework import viewsets, status
 from .serializers import PostSerializer
-from .models import Post
 from rest_framework import permissions
 import pickle
 import os
@@ -29,6 +23,23 @@ maxlen=10
 max_words = 3000
 tokenizer = Tokenizer(num_words=max_words)
 m = MeCab.Tagger()
+
+
+def index(request):
+    return HttpResponse("Hello, world. You're at the index.")
+
+
+class IndexView(generic.ListView):
+    template_name = 'api/index_post.html'
+    context_object_name = 'posts'
+
+    def get_queryset(self):
+        return Post.objects.order_by('created_at')[:5]
+
+class DetailView(generic.DetailView):
+    model = Post
+    template_name = 'api/detail_post.html'
+
 
 class PostView(viewsets.ModelViewSet):
     queryset = Post.objects.all()

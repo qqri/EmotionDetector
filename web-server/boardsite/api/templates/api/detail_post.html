@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Detail</title>
+</head>
+<body>
+    <table>
+        {% csrf_token %}
+        <thead>
+            <tr>
+                <th>제목</th>
+                <th>작성자</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+        <tr>
+            <td>{{ post.title }}</td>
+            <td>{{ post.user}}</td>
+        </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>
