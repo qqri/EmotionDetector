@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>POST_LIST</title>
+</head>
+<body>
+    {% if posts %}
+        <ul>
+        {% for post in posts %}
+            {{ post.title }}
+            {{ post.content }}
+            <br>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No polls are available.</p>
+    {% endif %}
+</body>
+</html>
