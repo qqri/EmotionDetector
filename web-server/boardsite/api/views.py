@@ -19,10 +19,14 @@ def index(request):
 class IndexView(generic.ListView):
     model = Post
     template_name = 'api/index_post.html'
+
+class ReadView(generic.ListView):
+    model = Post
+    template_name = 'api/read_post.html'
     context_object_name = 'posts'
 
     def get_queryset(self):
-        return Post.objects.order_by('created_at')[:20]
+        return Post.objects.order_by('created_at')
 
 
 class DetailView(generic.DetailView):
