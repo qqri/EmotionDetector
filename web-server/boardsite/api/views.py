@@ -1,6 +1,7 @@
 import os
 
 from django.conf import settings
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render, redirect
 
 # Create your views here.
@@ -25,8 +26,17 @@ class ReadView(generic.ListView):
     template_name = 'api/read_post.html'
     context_object_name = 'posts'
 
+    page_data = Paginator(Post.objects.all(), 5)
+
+    try:
+        posts = page_data.page(context_object_name)
+    except PageNotAnInteger:
+        posts = page_data.page(page_data.num_pages)
+    except EmptyPage:
+        posts = page_data.page(page_data.num_pages)
+
     def get_queryset(self):
-        return Post.objects.order_by('created_at')
+        return Post.objects.order_by('-created_at')
 
 
 class DetailView(generic.DetailView):

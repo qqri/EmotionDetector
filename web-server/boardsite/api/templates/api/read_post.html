@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Emotion Detector</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="{% static 'css/cover.css' %}">
+    </head>
+
+    <body class="text-center">
+        <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+          <header class="masthead mb-auto">
+            <div class="inner">
+              <h3 class="masthead-brand">감정일기</h3>
+              <nav class="nav nav-masthead justify-content-center">
+                <a class="nav-link active" href="#">Home</a>
+                <a class="nav-link" href="#">Features</a>
+                <a class="nav-link" href="#">Contact</a>
+              </nav>
+            </div>
+          </header>
+
+            <br> <br>
+            {% if posts %}
+            {% for post in posts %}
+            <main role="main" class="container">
+              <div class="jumbotron">
+                  <ul>
+                  <h2>제목 : {{ post.title }}</h2>
+                  <br>
+                  <p>작성일 : {{ post.created_at }}</p>
+
+                  <p>작성자 : {{ post.user }}</p>
+                  <br>
+                  <p>본문 : {{ post.content }}</p>
+
+                  </ul>
+              </div>
+              </main>
+
+            {% endfor %}
+            {% else %}
+                <p>No are available.</p>
+            {% endif %}
+
+          <footer class="mastfoot mt-auto">
+            <div class="inner">
+              <p>Cover template for <a href="https://getbootstrap.com/">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+            </div>
+          </footer>
+
+        </div>
+
+    </body>
+
+</html>
