@@ -22,8 +22,6 @@ urlpatterns = [
     # path('posts/<int:pk>/', post_detail, name='post_detail'),
 
     path('diary/', views.IndexView.as_view(), name='post_index'),
-
-    path('diary/read/<int:pk>', views.DetailView.as_view(), name='post_detail_list'),
-    path('diary/read/', views.ReadView.as_view(), name='post_read_list'),
+    path('diary/read', views.ReadView.as_view(), name='post_read_list'),
     path('diary/create', views.CreatePostView , name = 'post_create'),
 ]

@@ -8,7 +8,11 @@
 a,
 a:focus,
 a:hover {
-  color: #fff;
+  color: #666;
+}
+a{
+  text-decoration:none
+  !important;
 }
 
 
