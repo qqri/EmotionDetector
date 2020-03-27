@@ -12,9 +12,9 @@
         <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
           <header class="masthead mb-auto">
             <div class="inner">
-              <h3 class="masthead-brand">감정일기</h3>
+              <h3 class="masthead-brand" style="text-decoration:none !important; font-color:black !important;"><a href="/api/diary">감정일기</a></h3>
               <nav class="nav nav-masthead justify-content-center">
-                <a class="nav-link active" href="#">Home</a>
+                <a class="nav-link active" href="/api/diary/read">READ</a>
                 <a class="nav-link" href="#">Features</a>
                 <a class="nav-link" href="#">Contact</a>
               </nav>
@@ -22,20 +22,23 @@
           </header>
 
           <main role="main" class="inner cover">
-            <h1 class="cover-heading">Cover your page.</h1>
+            <h1 class="cover-heading">감정일기</h1>
             <p class="lead">
-               졸업프로젝트 B 감정일기 메인페이지 입니다.
+               졸업프로젝트 B 감정일기 메인페이지 입니다.<br>
+               일기를 쓰면 감정에 대한 우울 예측 결과값이 나타납니다.
             </p>
 
 
             <p class="lead">
-              <a href="#" class="btn btn-lg btn-secondary">Learn more</a>
+              <a href="/api/diary/create" class="btn btn-lg btn-secondary">Learn more</a>
             </p>
           </main>
 
+            <br>
           <footer class="mastfoot mt-auto">
             <div class="inner">
-              <p>Cover template for <a href="https://getbootstrap.com/">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+              <p>by <a href="#">Lucky13</a>.</p>
+              <p style="color:white !important;">Cover template for <a href="https://getbootstrap.com/">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
             </div>
           </footer>
 

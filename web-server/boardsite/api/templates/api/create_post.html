@@ -1,25 +1,53 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Create</title>
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8">
+        <title>Emotion Detector</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="{% static 'css/cover.css' %}">
+    </head>
 
-    {% block content %}
+    <body class="text-center">
+        <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+          <header class="masthead mb-auto">
+            <div class="inner">
+              <h3 class="masthead-brand"><a href="/api/diary">감정일기</a></h3>
+              <nav class="nav nav-masthead justify-content-center">
+                <a class="nav-link active" href="/api/diary/read">READ</a>
+                <a class="nav-link" href="#">Features</a>
+                <a class="nav-link" href="#">Contact</a>
+              </nav>
+            </div>
+          </header>
+        <br><br>
+          <main role="main" class="inner cover">
+              <br><br>
+                {% block content %}
 
-        <br>
-        <div class="container">
-            <h1>글쓰기</h1>
-            <hr>
-            <br><br>
-            <form method="POST" enctype="multipart/form-data">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <input type="submit" class="btn btn-dark" value="저장"/>
-            </form>
+                <br>
+                <div class="container">
+                    <h1>글쓰기</h1>
+                    <hr>
+                    <br><br>
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <input type="submit" class="btn btn-dark" value="저장"/>
+                    </form>
+                </div>
+
+               {% endblock %}
+
+
+          </main>
+
+          <footer class="mastfoot mt-auto">
+            <div class="inner">
+              <p>Cover template for <a href="https://getbootstrap.com/">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+            </div>
+          </footer>
+
         </div>
-
-    {% endblock %}
-</body>
+    </body>
 </html>

@@ -3,6 +3,7 @@ import os
 from django.conf import settings
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render, redirect
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
 # Create your views here.
 from django.http import HttpResponse, Http404
@@ -26,22 +27,17 @@ class ReadView(generic.ListView):
     template_name = 'api/read_post.html'
     context_object_name = 'posts'
 
-    page_data = Paginator(Post.objects.all(), 5)
-
-    try:
-        posts = page_data.page(context_object_name)
-    except PageNotAnInteger:
-        posts = page_data.page(page_data.num_pages)
-    except EmptyPage:
-        posts = page_data.page(page_data.num_pages)
-
     def get_queryset(self):
         return Post.objects.order_by('-created_at')
-
-
-class DetailView(generic.DetailView):
-    model = Post
-    template_name = 'api/detail_post.html'
+    #
+    # page_data = Paginator(Post.objects.all(), 5)
+    #
+    # try:
+    #     posts = page_data.page(context_object_name)
+    # except PageNotAnInteger:
+    #     posts = page_data.page(page_data.num_pages)
+    # except EmptyPage:
+    #     posts = page_data.page(page_data.num_pages)
 
 
 from .forms import CreatePost
@@ -54,7 +50,7 @@ def CreatePostView(request):
             # print( form.cleaned_data['content'] )
             # print( type(form.cleaned_data['content']) ) -> content 데이터 접근
             form.save()
-            return redirect('/api/diary/')
+            return redirect('/api/diary/read')
         else:
             return redirect('/api/diary/create')
     else:
