@@ -10,6 +10,7 @@ from django.http import HttpResponse, Http404
 from django.template.loader import get_template
 from .models import Post
 from django.views import generic
+from .apps import AppConfig, ApiConfig
 
 
 def index(request):
@@ -30,16 +31,15 @@ class ReadView(generic.ListView):
 
 
 from .forms import CreatePost
-import random
-per = ['[[0]]','[[1]]']
 def CreatePostView(request):
     if request.method == 'POST':
         form = CreatePost(request.POST)
 
         if form.is_valid():
+            data = ApiConfig.model.predict(request.sentence)
+
             instance = form.save(commit=False)
-            instance.subtitle = "[[0]]"
-           # instance.subtitle = random.choice(per)
+            instance.subtitle = data
             instance.user_id = None;
             instance.save()
 
