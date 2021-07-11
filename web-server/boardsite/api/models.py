@@ -12,10 +12,7 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     #body = RichTextUploadingField()
     def __str__(self):
-        return '[{}] {}'.format(self.user , self.title)
+        return '[{}] [{}] {}'.format(self.id,self.user , self.title)
 
     def post_save(self):
         self.save()
-    # class Meta:
-    #     managed = False
-    #     db_table = 'Post'

@@ -28,13 +28,13 @@ import os
 # In[148]:
 
 
-Data=pd.read_excel(' -- ', header=None)
+Data=pd.read_excel('C:\\Users\\qri\\model\\depressionO.xlsx', header=None)
 
 
 # In[149]:
 
 
-Data2=pd.read_excel(' -- ', header=None)
+Data2=pd.read_excel('C:\\Users\\qri\\model\\depressionX.xlsx', header=None)
 
 
 # In[150]:
@@ -171,7 +171,7 @@ from keras.layers import GRU
 model = Sequential()
 model.add(Embedding(max_words, embedding_dim, input_length=maxlen))
 model.add(GRU(32))
-model.add(Dense(1, activation='sigmoid'))
+model.add(Dense(1, activation='relu'))
 model.summary()
 
 

@@ -30,33 +30,17 @@ class ReadView(generic.ListView):
 
 
 from .forms import CreatePost
-
-import pickle
-import os
-from django.conf import settings
-import MeCab
-from keras_preprocessing.sequence import pad_sequences
-from keras.preprocessing.text import Tokenizer
-
+import random
+per = ['[[0]]','[[1]]']
 def CreatePostView(request):
-    maxlen = 10
-    max_words = 3000
-    tokenizer = Tokenizer(num_words=max_words)
-    m = MeCab.Tagger()
-    path = os.path.join(os.path.dirname(os.path.realpath(__file__)), settings.MODEL_ROOT)
-    def getSequences(sentence):
-        sentence = [x.split("\t")[0] for x in m.parse(sentence).split("\n") if not x == "EOS" and not x == ""]
-        return pad_sequences(tokenizer.texts_to_sequences([sentence]), maxlen=maxlen)
-    model = pickle.load(open(path, 'rb'))
-
     if request.method == 'POST':
         form = CreatePost(request.POST)
 
         if form.is_valid():
             instance = form.save(commit=False)
-            sentence = form.cleaned_data['content']
-            data = model.predict_classes(getSequences(sentence))
-            instance.subtitle = data
+            instance.subtitle = "[[0]]"
+           # instance.subtitle = random.choice(per)
+            instance.user_id = None;
             instance.save()
 
             return redirect('/api/diary/read')
@@ -65,4 +49,41 @@ def CreatePostView(request):
     else:
         form = CreatePost()
         return render(request, 'api/create_post.html', {'form': form})
+
+
+
+# import pickle
+# import os
+# from django.conf import settings
+# import MeCab
+# from keras_preprocessing.sequence import pad_sequences
+# from keras.preprocessing.text import Tokenizer
+#
+# def CreatePostView(request):
+#     maxlen = 10
+#     max_words = 3000
+#     tokenizer = Tokenizer(num_words=max_words)
+#     m = MeCab.Tagger()
+#     path = os.path.join(os.path.dirname(os.path.realpath(__file__)), settings.MODEL_ROOT)
+#     def getSequences(sentence):
+#         sentence = [x.split("\t")[0] for x in m.parse(sentence).split("\n") if not x == "EOS" and not x == ""]
+#         return pad_sequences(tokenizer.texts_to_sequences([sentence]), maxlen=maxlen)
+#     model = pickle.load(open(path, 'rb'))
+#
+#     if request.method == 'POST':
+#         form = CreatePost(request.POST)
+#
+#         if form.is_valid():
+#             instance = form.save(commit=False)
+#             sentence = form.cleaned_data['content']
+#             data = model.predict_classes(getSequences(sentence))
+#             instance.subtitle = data
+#             instance.save()
+#
+#             return redirect('/api/diary/read')
+#         else:
+#             return redirect('/api/diary/create')
+#     else:
+#         form = CreatePost()
+#         return render(request, 'api/create_post.html', {'form': form})
 
