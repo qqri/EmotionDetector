@@ -17,6 +17,8 @@ def index(request):
     return HttpResponse("Hello, world. You're at the index.")
 
 
+from .forms import CreatePost
+
 class IndexView(generic.ListView):
     model = Post
     template_name = 'api/index_post.html'
@@ -29,8 +31,6 @@ class ReadView(generic.ListView):
     def get_queryset(self):
         return Post.objects.order_by('-created_at')
 
-
-from .forms import CreatePost
 def CreatePostView(request):
     if request.method == 'POST':
         form = CreatePost(request.POST)
